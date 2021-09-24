@@ -1,0 +1,9 @@
+<h2>Child Component</h2>
+<p>Parent to child using Input Decorator:<b>{{messageTo}}</b></p><br>
+<p>Parent to Child using getter and setter:<b>{{name}}</b></p><br>
+<p>LogIn status:{{log_status}}</p>
+
+
+<label for="item-input">Add an item:</label>
+<input type="text" id="item-input" #newItem> <br>
+<button (click)="addNewItem(newItem.value)">Add to parent's list</button>

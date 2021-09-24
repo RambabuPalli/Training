@@ -1,0 +1,58 @@
+<h1>ngClass</h1>
+<ul>
+  <li>
+    <label for="saveable">saveable</label>
+    <input type="checkbox" [(ngModel)]="canSave" id="saveable" />
+  </li>
+  <li>
+    <label for="modified">modified:</label>
+    <input
+      type="checkbox"
+      [value]="!isUnchanged"
+      (change)="isUnchanged = !isUnchanged"
+      id="modified"
+    />
+  </li>
+  <li>
+    <label for="special"
+      >special: <input type="checkbox" [(ngModel)]="isSpecial" id="special"
+    /></label>
+  </li>
+</ul>
+<button (click)="setCurrentClasses()">Refresh</button>
+<div [ngClass]="currentClasses">
+  This div should be {{ canSave ? "" : "not" }} saveable,
+  {{ isUnchanged ? "unchanged" : "modified" }} and
+  {{ isSpecial ? "" : "not" }} special after clicking "Refresh".
+</div>
+<br />
+<div [ngClass]="isspecial ? 'special_1' : 'not'">
+  if div special it shows green text or else red
+</div>
+<br />
+special:<input
+  type="checkbox"
+  [value]="isspecial"
+  (change)="isspecial = !isspecial"
+/>
+
+<hr />
+<h1>ngStyle</h1>
+<input type="radio" [(ngModel)]="size" value="12px" />12px
+<input type="radio" [(ngModel)]="size" value="24px" />24px
+<br />
+<div [style.font-size]="size">Sizes of text based on the selected radio</div>
+<hr />
+<h1>ngIf</h1>
+<button (click)="show = !show">Click to view Hidden data</button>
+<div *ngIf="show">
+  <p>Hello user</p>
+</div>
+
+<hr />
+<h1>ngFor</h1>
+<p>list items are:</p>
+<div *ngFor="let data of Listitem">
+  <p>{{ data }}</p>
+</div>
+<hr />

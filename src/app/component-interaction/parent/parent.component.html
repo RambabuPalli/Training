@@ -1,0 +1,10 @@
+<h2>Parent Component</h2>
+<button class="btn btn-primary" (click)="status=true">Login</button>
+<button class="btn btn-primary" (click)="status=false">Logout</button>
+
+
+
+<ul>
+  <li *ngFor="let item of items">{{item}}</li>
+</ul>
+<app-child (newItemEvent)="addItem($event)"[log_status]="status"[name]="name" [messageTo]="message"></app-child>

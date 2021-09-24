@@ -1,0 +1,156 @@
+<div class="container">
+  {{data|json}}
+  <form  #profileform="ngForm">
+    <div class="row">
+      <div class="col-6 form-group">
+        <label>Firstname:</label>
+      <input type="text" class="form-control" #firstname="ngModel"   name="firstname" required pattern="[a-zA-Z ]*"  minlength="3" [(ngModel)]="data.firstname">
+      <div *ngIf="firstname.errors &&firstname.invalid && ( firstname.dirty || firstname.touched)">
+        <small class="text-danger" *ngIf="firstname.errors.required">Username required</small>
+        <small class="text-danger" *ngIf="firstname.errors.pattern">Username must not contain special characters</small>&nbsp;
+        <small class="text-danger" *ngIf="firstname.errors.minlength">Username must be 3 characters</small>
+      </div>
+      </div>
+
+
+    </div>
+
+    <div class="row">
+      <div class="col-6 form-group">
+        <label>Passsword:</label>
+      <input type="password" class="form-control" #password="ngModel" name="pass" [(ngModel)]="data.password" required pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}">
+      </div>
+      <div *ngIf="password.invalid &&(password.dirty||password.touched) " class="text-danger">
+        <div *ngIf="password.errors?.required ">
+             <small>*password required  </small>
+        </div>
+        <div *ngIf="password.errors?.pattern ">
+          <small>*password must contain min 8 characers<br>
+           1 Lower case [a-z] <br>1 uppercase [A-Z] <br> 1 Number [0-9] <br> 1 Special Character [!,@,#,$,%] </small>
+     </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-6 form-group">
+        <label>Select College</label>
+        <select class="form-select"  #clg="ngModel" name="clg" [(ngModel)]="data.select_clg" required>
+          <option  value="" disabled> Select Option</option>
+          <option *ngFor="let name of colleges ">{{name}}</option>
+        </select>
+        <div *ngIf="clg.invalid &&(clg.dirty||clg.touched) " class="text-danger">
+          <div *ngIf="clg.errors?.required ">
+               <small>*Select atleast one option  </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <label>Gender:</label>&nbsp;&nbsp;
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio"  name="gen"[(ngModel)]="data.gender" #gen="ngModel"required value="Male">
+        <label > Male </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="gen" [(ngModel)]="data.gender"  #gen="ngModel"required value="Female">
+        <label > Female </label>
+        </div>
+        <div *ngIf="gen.invalid &&(gen.dirty||gen.touched) " class="text-danger">
+          <div *ngIf="gen.errors?.required ">
+               <small>*choose one option  </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" name="notification" [(ngModel)]="data.notify">
+      <label >Enable for notiications</label>
+    </div>
+
+
+    <div class="row">
+      <div class="col-6 form-group">
+        <label >Description:</label>
+        <textarea class="form-control" [(ngModel)]="data.desc" name="descript" rows="3" #desc="ngModel"required minlength="50"></textarea>
+        <div *ngIf="desc.invalid &&(desc.dirty||desc.touched) " class="text-danger">
+          <div *ngIf="desc.errors?.required ">
+               <small>*Description required  </small>
+          </div>
+          <div *ngIf="desc.errors?.minlength ">
+            <small>*Description must be 50 characets  </small>
+       </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row" >
+      <div class="col">
+        <label>Select Hobbie:</label>&nbsp;&nbsp;
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox"  name="one"value="true" [(ngModel)]="data.cricket" >
+          <label >
+           Cricket
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="two" [(ngModel)]="data.hockey">
+          <label >
+          Hockey
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="three" [(ngModel)]="data.football" >
+          <label >
+           Football
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" name="four" [(ngModel)]="data.kabaddi">
+          <label >
+          Football
+          </label>
+        </div>
+      </div>
+      <!-- <div  *ngIf="profileform.controls.sport.invalid &&(profileform.controls.sport.dirty||profileform.controls.sport.touched) " >
+        <div *ngIf="profileform.controls.sport.errors?.required" class="text-danger">
+        <small>*Please Select atleast one form</small>
+      </div>
+      </div>-->
+
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <label>DOB:</label>&nbsp;&nbsp;
+        <input type="date" [(ngModel)]="data.DOB" min="1900-01-01" name="birth" required max={{today}} #DOB="ngModel">
+        <div *ngIf="DOB.invalid &&(DOB.dirty||DOB.touched) " class="text-danger">
+          <div *ngIf="DOB.errors?.required ">
+               <small>*DOB required  </small>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row form-group" >
+      <div class="col-6">
+
+            <angular2-multiselect [data]="dropdownList" [settings]="dropdownSettings" #multi_select="ngModel"  required name="req"[(ngModel)]="data.skills"></angular2-multiselect>
+
+            <div *ngIf="multi_select.invalid &&(multi_select.dirty||multi_select.touched) " class="text-danger">
+              <div *ngIf="multi_select.errors?.required ">
+                   <small>*Atleast one option must be selected  </small>
+              </div>
+            </div>
+        </div>
+
+    </div>
+
+  </form>
+</div>

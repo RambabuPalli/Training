@@ -1,0 +1,147 @@
+
+
+<div class="container">
+  <p>Form_data:{{profileform.value|json}}</p>
+  <form [formGroup]="profileform">
+    <div class="row ">
+      <div class="col-6 form-group">
+        <label>Firstname :</label>
+        <input type="text" class="form-control" formControlName="firstname">
+        <div *ngIf="profileform.controls.firstname.invalid &&(profileform.controls.firstname.dirty||profileform.controls.firstname.touched) " class="text-danger">
+          <div *ngIf="profileform.controls.firstname.errors?.required ">
+               <small>*Firstname required  </small>
+          </div>
+          <div *ngIf="profileform.controls.firstname.errors?.pattern ">
+            <small>*Username mustnot contain special characters and numbers  </small>
+          </div>
+          <div *ngIf="profileform.controls.firstname.errors?.minlength ">
+            <small>*Username Must contain atleast 3 charatcers </small>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-6 form-group">
+        <label>Password:</label>
+        <input type="password" class="form-control" formControlName="password">
+        <div *ngIf="profileform.controls.password.invalid &&(profileform.controls.password.dirty||profileform.controls.password.touched) " class="text-danger">
+          <div *ngIf="profileform.controls.password.errors?.required ">
+               <small>*password required  </small>
+          </div>
+          <div *ngIf="profileform.controls.password.errors?.pattern ">
+            <small>*password must contain min 8 characers<br>
+             1 Lower case [a-z] <br>1 uppercase [A-Z] <br> 1 Number [0-9] <br> 1 Special Character [!,@,#,$,%] </small>
+       </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col-6 form-group">
+        <label>Select College</label>
+        <select class="form-select" formControlName="college"  >
+          <option  value="" disabled> Select Option</option>
+          <option *ngFor="let name of colleges">{{name}}</option>
+        </select>
+        <div *ngIf="profileform.controls.college.invalid &&(profileform.controls.college.dirty||profileform.controls.college.touched) " class="text-danger">
+          <div *ngIf="profileform.controls.college.errors?.required ">
+               <small>*Please select option  </small>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <label>Gender:</label>&nbsp;&nbsp;
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio"  formControlName="gender" value="Male">
+        <label > Male </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio"  formControlName="gender" value="Female">
+        <label > Female </label>
+        </div>
+      </div>
+      <div *ngIf="profileform.controls.gender.invalid &&(profileform.controls.gender.dirty||profileform.controls.gender.touched) " class="text-danger">
+        <div *ngIf="profileform.controls.gender.errors?.required ">
+             <small>*Gender is required  </small>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox"  formControlName="notify">
+      <label >Enable for notiications</label
+      >
+    </div>
+    <div class="row">
+      <div class="col-6 form-group">
+        <label >Description:</label>
+        <textarea class="form-control" formControlName="desc" rows="3"></textarea>
+        <div *ngIf="profileform.controls.desc.invalid &&(profileform.controls.desc.dirty||profileform.controls.desc.touched) " class="text-danger">
+          <div *ngIf="profileform.controls.desc.errors?.required ">
+               <small>*Description required  </small>
+          </div>
+          <div *ngIf="profileform.controls.desc.errors?.minength">
+            <small>*Description  must contain 50 Characters  </small>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row" formGroupName="sport">
+      <div class="col">
+        <label>Select Hobbie:</label>&nbsp;&nbsp;
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox"  value="true" formControlName="cricket" >
+          <label >
+           Cricket
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" formControlName="hockey">
+          <label >
+          Hockey
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox"  formControlName="football" >
+          <label >
+           Football
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" formControlName="kabaddi">
+          <label >
+          Football
+          </label>
+        </div>
+      </div>
+
+
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <label>DOB:</label>&nbsp;&nbsp;
+        <input type="date" formControlName="DOB" min="1900-01-01" max={{today}}>
+      </div>
+    </div>
+
+    <div class="row form-group" >
+      <angular2-multiselect [data]="dropdownList" [settings]="dropdownSettings"  formControlName="skills"></angular2-multiselect>
+
+    </div>
+
+
+  </form>
+</div>
+
+
+
