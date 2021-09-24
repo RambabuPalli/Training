@@ -11,7 +11,7 @@ import {  throwError } from 'rxjs';
 export class WeatherComponent implements OnInit {
 
   constructor(private _http:HttpClient) { }
-  url="https://api.openweathermap.org/data/2.5/weather?q=vijayawada&appid=e1596a6165b7c1107776162c5e887d90";
+  url="https://api.openweathermap.org/data/2.5/weather?q=vijayawada&appid={APIKEY}";
   WeatherData:any;
   ngOnInit(): void {
     this.WeatherData = {
